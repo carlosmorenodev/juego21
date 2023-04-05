@@ -65,8 +65,8 @@ header {
 .modal {
     background-color: aliceblue; 
     border: solid 3px black;   
-    height: 200px;
-    padding: 10px 80px;
+    text-align: center;
+    padding: 40px 80px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -79,6 +79,7 @@ header {
 }
 
 .close-modal {
+    margin-top: 10px;
     padding: 10px 30px;
     border: none;
     cursor: pointer;
