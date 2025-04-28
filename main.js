@@ -1,139 +1,76 @@
-const addCard = document.getElementById('addCard');
-const card = document.getElementById('card');
-const modal = document.getElementById('modal');
-const modalMsg = document.getElementById('modalMsg');
-const closeModal = document.getElementById('closeModal');
-const resetGame = document.getElementById('resetGame');
-let puntuation = document.getElementById('puntuation');
+/* main.js */
+
+const addCardButton = document.getElementById('addCard');
+const cardElement = document.getElementById('card');
+const modalElement = document.getElementById('modal');
+const modalMessageElement = document.getElementById('modalMsg');
+const closeModalButton = document.getElementById('closeModal');
+const resetGameButton = document.getElementById('resetGame');
+let puntuationElement = document.getElementById('puntuation');
 
 let count = 0;
-const cardlist = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+const cardList = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
-puntuation.innerHTML = count;
+puntuationElement.innerHTML = count;
 
-/* añadir carta */
-
-addCard.addEventListener("click", () => {
-    let turn = cardlist[Math.floor(Math.random() * cardlist.length)];
-    puntuation.innerHTML = count;
-    card.innerHTML = turn;
-    let valor;
-
-    switch (turn) {
-        case 'A':
-            valor = 1;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-        case '2':
-            valor = 2;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-        case '3':
-            valor = 3;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-        case '4':
-            valor = 4;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-        case '5':
-            valor = 5;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-        case '6':
-            valor = 6;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-        case '7':
-            valor = 7;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-        case '8':
-            valor = 8;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-        case '9':
-            valor = 9;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-        case '10':
-            valor = 10;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-        case 'J':
-            valor = 10;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-        case 'Q':
-            valor = 10;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-        case 'K':
-            valor = 10;
-            count = count + valor;
-            puntuation.innerHTML = count;
-            card.innerHTML = turn;
-            break;
-    }
-
-const limite = 21;
-
-if (count == 21) {
-    modal.classList.add('modal-active');
-    modal.style.backgroundColor = "green";
-    modalMsg.innerHTML = "¡Enhorabuena! Has ganado :)";
-    addCard.disabled = true;
-} if (count > 21) {
-    modal.classList.add('modal-active');
-    modal.style.backgroundColor = "red";
-    modalMsg.innerHTML = "¡Lo siento! Has perdido :(";
-    addCard.disabled = true;
+/* Function to display the card with animation */
+function displayCard(turn) {
+    cardElement.innerHTML = turn;
+    cardElement.classList.remove('show'); /* Reset animation */
+    void cardElement.offsetWidth; /* Trigger reflow to restart animation */
+    cardElement.classList.add('show'); /* Start animation */
 }
 
-/* Cerrar modal */
-closeModal.addEventListener("click", () => {
-    modal.classList.remove('modal-active');
-    resetGame.style.display = "block";
-})
 
-/* REINICIAR JUEGO */
+/* Add card functionality */
+addCardButton.addEventListener("click", () => {
+    let turn = cardList[Math.floor(Math.random() * cardList.length)];
+    let value;
 
-resetGame.addEventListener("click", () => {
+    switch (turn) {
+        case 'A': value = 1; break;
+        case '2': value = 2; break;
+        case '3': value = 3; break;
+        case '4': value = 4; break;
+        case '5': value = 5; break;
+        case '6': value = 6; break;
+        case '7': value = 7; break;
+        case '8': value = 8; break;
+        case '9': value = 9; break;
+        default: value = 10; /* For 10, J, Q, K */
+    }
+
+    count += value;
+    puntuationElement.innerHTML = count;
+    displayCard(turn);  /* Display card with animation */
+
+    const limit = 21;
+
+    if (count === limit) {
+        modalElement.classList.add('modal-active');
+        modalElement.style.backgroundColor = "green";
+        modalMessageElement.innerHTML = "¡Enhorabuena! Has ganado :)";
+        addCardButton.disabled = true;
+    } else if (count > limit) {
+        modalElement.classList.add('modal-active');
+        modalElement.style.backgroundColor = "red";
+        modalMessageElement.innerHTML = "¡Lo siento! Has perdido :(";
+        addCardButton.disabled = true;
+    }
+});
+
+/* Close modal */
+closeModalButton.addEventListener("click", () => {
+    modalElement.classList.remove('modal-active');
+    resetGameButton.style.visibility = "visible";
+});
+
+/* Reset game */
+resetGameButton.addEventListener("click", () => {
     count = 0;
-    puntuation.innerHTML = 0;
-    card.innerHTML = "";
-    addCard.disabled = false;
-})
-
-
-
-
-
-    /* console.log(cardlist[Math.floor(Math.random() * cardlist.length)]); */
-    console.log(`Contador: ${count}`);
-    console.log(turn);
-})
+    puntuationElement.innerHTML = 0;
+    cardElement.innerHTML = "";
+    cardElement.classList.remove('show'); /* Ensure card is hidden on reset */
+    addCardButton.disabled = false;
+    resetGameButton.style.visibility = "hidden";
+});
