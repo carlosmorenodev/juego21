@@ -1,54 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego 21 | Carlos Moreno Martín</title>
+    <title>Juego 21 | Modern Edition | Carlos Moreno Martín</title>
+    <!-- Google Fonts (Fuentes de Google) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/2e5476f1d5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-
-
-    <!-- Modal -->
-    <div class="modal" id="modal">
-        <h1 class="modal-msg" id="modalMsg">Resultado</h1>
-        <button class="close-modal" id="closeModal">Cerrar</button>
+    <!-- Capa de fondo del Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <div class="modal-icon" id="modalIcon"><i class="fa-solid fa-trophy"></i></div>
+                <h1 class="modal-msg" id="modalMsg">Resultado</h1>
+                <button class="btn btn-primary close-modal" id="closeModal">Jugar de nuevo</button>
+            </div>
+        </div>
     </div>
-    <!-- Modal -->
 
-    
     <div class="container">
         <header>
-            <h1 class="header-title">Juego 21</h1>
-            <div class="contact">
+            <div class="header-logo">
+                <i class="fa-solid fa-spade"></i>
+                <h1 class="header-title">Juego 21</h1>
+            </div>
+            <div class="contact glass-panel">
                 <h2>Carlos Moreno Martín</h2>
                 <div class="contact-icons">
                     <a href="https://github.com/carlosmorenodev" target="_blank"><i class="fa-brands fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/carlosmorenomartindev/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
                     <a href="https://codepen.io/carlosmmdev" target="_blank"><i class="fa-brands fa-codepen"></i></a>
-                    
-                    <a href="https://carlosmorenodev.github.io/carlosmorenodev/" target="_blank"><i class="fa-solid fa-globe"></i></a>
+                    <a href="https://carlosmorenodev.vercel.app/" target="_blank"><i class="fa-solid fa-globe"></i></a>
                 </div>
                 <a class="contact-email" href="mailto:carlosmorenomartindev@gmail.com">carlosmorenomartindev@gmail.com</a>
             </div>
-            
         </header>
-        <div class="puntuation" id="puntuation">1</div>
-        <div class="card" id="card"></div>
-        <button class="add-card" id="addCard">Añadir carta</button>
-        <button id="resetGame" class="reset-game">Reiniciar juego</button>
 
+        <main class="game-board glass-panel">
+            <div class="score-container">
+                <span class="score-label">Puntuación</span>
+                <div class="puntuation" id="puntuation">0</div>
+            </div>
+            
+            <div class="card-area">
+                <div class="card-container">
+                    <div class="card" id="card">
+                        <div class="card-inner" id="cardInner">
+                            <div class="card-front">
+                                <div class="card-pattern"></div>
+                            </div>
+                            <div class="card-back" id="cardValue">
+                                <!-- El valor de la carta se inserta a través de JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn btn-cta add-card" id="addCard">
+                    <i class="fa-solid fa-plus"></i> Añadir carta
+                </button>
+                <button id="resetGame" class="btn btn-secondary reset-game hidden">
+                    <i class="fa-solid fa-rotate-right"></i> Reiniciar
+                </button>
+            </div>
+        </main>
     </div>
 
-
-
     <script src="main.js"></script>
-
 </body>
 
 </html>
